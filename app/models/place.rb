@@ -126,4 +126,42 @@ class Place
 		result = self.class.near(@location, max_meters)
 		self.class.to_places(result)
 	end
+
+	def photos(offset = 0, limit = nil)
+		photos = Photo.find_photos_for_place(@id).skip(offset)
+		photos = photos.limit(limit) if !limit.nil?
+		result = []
+
+		if !photos.nil?
+			photos.map { |p| result << Photo.new(p)}
+		end
+
+		return result
+	end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
